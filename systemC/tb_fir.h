@@ -11,12 +11,24 @@ SC_MODULE (tb_fir) {
   sc_in<bool>           inp_rdy;
   sc_in<bool>           out_vld;
   sc_out<bool>          out_rdy;
+  
+   // File input
+  std::string input_file;
+  std::string output_file;
 
   void source();
   void sink();
 
-  SC_CTOR ( tb_fir ) {
+  SC_CTOR ( tb_fir ) : input_file(""), output_file("") {
     SC_CTHREAD( source, clk.pos() );
     SC_CTHREAD( sink, clk.pos() );
+  }
+
+  void set_input_file(const std::string& infile) {
+    input_file = infile;
+  }
+
+  void set_output_file(const std::string& outfile) {
+    output_file = outfile;
   }
 };

@@ -55,7 +55,15 @@ SC_MODULE( SYSTEM ) {
 SYSTEM *top = NULL;
 
 int sc_main(int argc, char* argv[]) {
+  if (argc < 3) {
+    std::cerr << "Usage: " << argv[0] << " <input_file> <output_file>\n";
+    return 1;
+  }
+  
   top = new SYSTEM("top");
+  top->tb_fir0->set_input_file(argv[1]);
+  top->tb_fir0->set_output_file(argv[2]);
+
   sc_start();
 
   return 0;

@@ -25,9 +25,10 @@ void fir::fir_main(void) {
     do {
       wait();
     } while(!inp_vld.read());
+
     in_val = inp.read();
     inp_rdy.write(0);
-
+    
     for (int i = 5-1; i > 0; i --) {
       taps[i] = taps[i-1];
     }
@@ -37,7 +38,7 @@ void fir::fir_main(void) {
     for (int i = 0; i < 5; i ++) {
       out_val += coef[i] * taps[i];
     }
-
+    
     out_vld.write(1);
     out.write(out_val);
     do{
