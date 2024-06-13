@@ -19,16 +19,16 @@ class Dramsys:
     self.traces_path        = join(self.cfgs_path,    "traces"  )
 
 
-  def __create_cfg_and_trace_files__(self, input_path, prefix):
-    input_files = self.__list_trace_files_with_prefix__(input_path, prefix)
-
-    for name, file in input_files:
-      if not isfile(join(self.traces_path, basename(file))):
-        os.system(f"mv {file} {self.traces_path}")
-        self.__create_config_files__(self.cfg_based, basename(file), name)
-
-      else:
-        raise Exception(f"file {file} already exists in {self.traces_path}")
+  #def __create_cfg_and_trace_files__(self, input_path, prefix):
+  #  input_files = self.__list_trace_files_with_prefix__(input_path, prefix)
+  #
+  #  for name, file in input_files:
+  #    if not isfile(join(self.traces_path, basename(file))):
+  #      os.system(f"mv {file} {self.traces_path}")
+  #      self.__create_config_files__(self.cfg_based, basename(file), name)
+  #
+  #    else:
+  #      raise Exception(f"file {file} already exists in {self.traces_path}")
 
 
   def __list_cfg_files_with_prefix__(self, path: str, prefix: str):
@@ -68,11 +68,19 @@ class Dramsys:
     print(f"Executing now: {name}")
 
 
+  def __display_summary__(self):
+    print("Execution List:")
+    for name, file in self.input_files:
+      print(f"file: {name} - {file}")
+
+
   # input_path refers to the scalesim files to be converted
-  def run_simulation(self, input_path):
-    self.input_path = input_path
-    self.__create_cfg_and_trace_files__(self.input_path, self.prefix)
-    self.input_files = self.__list_cfg_files_with_prefix__(self.cfgs_path, self.prefix)
+  def run_simulation(self, config_dir: str = ''):
+    #self.input_path = input_path
+    #self.__create_cfg_and_trace_files__(self.input_path, self.prefix)
+    self.input_files = self.__list_cfg_files_with_prefix__(config_dir, self.prefix)
+
+    self.__display_summary__()
 
     for name, file in self.input_files:
       self.__display_info__(name)
@@ -101,4 +109,5 @@ class Dramsys:
       if output_file == '':
         output_file = file_name + ".txt"
     cmd = self.__generate_cmd__(cfg_file, output_file)
-    os.system(cmd)
+    print(cmd)
+    #os.system(cmd)
