@@ -31,7 +31,7 @@ class Dramsys:
   #      raise Exception(f"file {file} already exists in {self.traces_path}")
 
 
-  def __list_cfg_files_with_prefix__(self, path: str, prefix: str):
+  def __list_trace_files_with_prefix__(self, path: str, prefix: str):
     files = [
       (f[:-4], join(path, f)) 
       for f in listdir(path) 
@@ -40,7 +40,7 @@ class Dramsys:
     return files
 
 
-  def __list_trace_files_with_prefix__(self, path: str, prefix: str):
+  def __list_cfg_files_with_prefix__(self, path: str, prefix: str):
     files = [
       (f[:-5], join(path, f)) 
       for f in listdir(path) 
@@ -75,23 +75,28 @@ class Dramsys:
 
 
   # input_path refers to the scalesim files to be converted
-  def run_simulation(self, config_dir: str = ''):
-    #self.input_path = input_path
-    #self.__create_cfg_and_trace_files__(self.input_path, self.prefix)
+  def run_simulation(self, config_dir: str = '', output_dir = ''):
+    if config_dir == '':
+      config_dir = self.cfgs_path
+
     self.input_files = self.__list_cfg_files_with_prefix__(config_dir, self.prefix)
+    out_files = []
 
     self.__display_summary__()
 
     for name, file in self.input_files:
       self.__display_info__(name)
-      self.run_execution(file)
+      out_file = self.run_execution(file, output_folder=output_dir)
+      out_files.append(out_file)
+
+    return out_files
 
 
   def __generate_cmd__(self, cfg_file, output_file):
     return f"{self.dramsys_exec_path} {cfg_file} > {output_file}"
 
 
-  def run_execution(self, cfg_file, output_file = ''):
+  def run_execution(self, cfg_file, output_folder = '', output_file = ''):
     if not isabs(cfg_file):
       relative_cfg_file = join(self.cfgs_path, cfg_file)
     
@@ -107,7 +112,11 @@ class Dramsys:
     else:
       file_name = basename(cfg_file)[:-5]
       if output_file == '':
-        output_file = file_name + ".txt"
+        output_file = file_name + "_log" + ".txt"
+      if output_folder != '':
+        output_file = join(output_folder, output_file)
+
     cmd = self.__generate_cmd__(cfg_file, output_file)
-    print(cmd)
-    #os.system(cmd)
+    #print(cmd)
+    os.system(cmd)
+    return output_file
