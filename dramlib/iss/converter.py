@@ -9,8 +9,9 @@ class Converter:
     'w': 'write'
   }
 
-  def __init__(self, dramsys_path) -> None:
+  def __init__(self, dramsys_path, iss_path, app) -> None:
     self.init_paths(dramsys_path)
+    self.init_iss_paths(iss_path, app)
 
   def init_paths(self, dramsys_path):
     self.dramsys_path = dramsys_path
@@ -20,6 +21,14 @@ class Converter:
     self.memspec_path = join(self.config_path, "memspec")
     self.simconfig_path = join(self.config_path, "simconfig")
     self.traces_path = join(self.config_path, "traces")
+
+  def init_iss_paths(self, iss_path, app):
+    self.path_iss = iss_path
+    self.path_apps = join(iss_path, "apps")
+    self.path_app = join(self.path_apps, app)
+    self.path_build_release = join(self.path_app, "build_release")
+    self.path_exit = join(self.path_app, "exit")
+    self.path_input = join(self.path_app, "input")
 
   def conv(self, output_file = '../build_release/main_mem.stl', input_file = '../build_release/main_mem.trace'):
     counter = 0
@@ -116,8 +125,21 @@ class Converter:
       'mcc': self.mcconfig,
       'mem': self.memspec_path,
       'sim': self.simconfig_path,
-      'trc': self.traces_path
+      'trc': self.traces_path,
+      'iss': self.path_iss,
+      'aps': self.path_apps,
+      'app': self.path_app,
+      'brl': self.path_build_release,
+      'inp': self.path_input,
+      'ext': self.path_exit,
     }
     return data[key]
+  
+  def get_output_log_path(self):
+    return join(self.path_build_release, "log.txt")
+  
+  def get_trace_file_path(self):
+    return join(self.path_build_release, "main_mem.trace")
+  
 
 
