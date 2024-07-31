@@ -28,21 +28,29 @@ class Parser:
       for line in f:
         check = self.pattern_frequency.findall(line)
         if len(check) > 0:
-          frequency = check[0]
-          check = self.pattern_clusters.findall(line)
-        elif len(check) > 0:
-          clusters = check[0]
-          check = self.pattern_units.findall(line)
-        elif len(check) > 0:
-          units = check[0]
-          check = self.pattern_lanes.findall(line)
-        elif len(check) > 0:
-          lanes = check[0]
+          frequency = int(check[0])
+          continue
+
+        check = self.pattern_clusters.findall(line)
+        if len(check) > 0:
+          clusters = int(check[0])
+          continue
+
+        check = self.pattern_units.findall(line)
+        if len(check) > 0:
+          units = int(check[0])
+          continue
+
+        check = self.pattern_lanes.findall(line)
+        if len(check) > 0:
+          lanes = int(check[0])
+          continue
       f.close()
-    df['frequency'].append(int(frequency))
-    df['clusters'].append(int(clusters))
-    df['units'].append(int(units))
-    df['lanes'].append(int(lanes))
+      
+    df['frequency'].append(frequency)
+    df['clusters'].append(clusters)
+    df['units'].append(units)
+    df['lanes'].append(lanes)
     df = pd.DataFrame(df)
 
     self.df = df
