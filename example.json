@@ -1,0 +1,29 @@
+{
+    "experiment":{
+        "params":{
+            "prefix": "cluster01",
+            "platform": "cnn",
+            "app": "yololite",
+            "dsys_cfg": "ddr4-example.json"
+        },
+        "paths":{
+            "path_to_log_file": "/home/luismendes/...",
+            "path_to_original_trace_file": "/home/luismendes/...",
+            "path_to_dramsys_config_file": "/home/luismendes/...",
+            "path_to_created_trace_file": "/home/luismendes/...",
+            "path_to_output_dramsys": "/home/luismendes/...",
+            "path_to_output_parsed": "/home/luismendes/...",
+            "path_to_output_graphs": "/home/luismendes/..."
+        },
+        "config":{
+            "clusters": 8,
+            "units": 8,
+            "lanes": 2,
+            "clkMhz": 200,
+            "n_rams": 8,
+            "line_size": 4096,
+            "associativity": 4,
+            "ram_size": 524288
+        }
+    }
+}
