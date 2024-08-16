@@ -9,7 +9,7 @@ class DRAMConfigFile:
   def start(self, input_file, path_file):
     self.read_input(input_file)
     self.read_path_file(path_file)
-    self.init_paths()
+    self.calculate_paths()
     self.make_dirs()
   
   STANDARD_CLUSTER_VALUE = 8
@@ -20,6 +20,7 @@ class DRAMConfigFile:
   STANDARD_LINESIZE_VALUE = 4096
   STANDARD_ASSOCIATIVITY_VALUE = 4
   STANDARD_RAMSIZE_VALUE = 524288
+  STANDARD_BURST_LENGTH = 8
   
   def init_values(self):
     self.data = {}
@@ -41,11 +42,13 @@ class DRAMConfigFile:
     self.data['configs']['n_rams'] =        self.STANDARD_NRAMS_VALUE, 
     self.data['configs']['line_size'] =     self.STANDARD_LINESIZE_VALUE, 
     self.data['configs']['associativity'] = self.STANDARD_ASSOCIATIVITY_VALUE, 
-    self.data['configs']['ram_size'] =      self.STANDARD_RAMSIZE_VALUE  
+    self.data['configs']['ram_size'] =      self.STANDARD_RAMSIZE_VALUE
+    self.data['configs']['burst_length'] =  self.STANDARD_BURST_LENGTH  
 
     self.data['paths']['path_to_log_file'] =            None,
     self.data['paths']['path_to_original_trace_file'] = None, 
     self.data['paths']['path_to_dramsys_config_file'] = None,
+    self.data['paths']['path_to_created_config_file'] = None,
     self.data['paths']['path_to_created_trace_file'] =  None,
     self.data['paths']['path_to_output_dramsys'] =      None,
     self.data['paths']['path_to_output_parsed'] =       None,
@@ -130,6 +133,12 @@ class DRAMConfigFile:
       df['params']['dsys_cfg']
     )
 
+    df['paths']['path_to_created_config_file'] = join(
+      df['paths']['dramsys'], 
+      'configs', 
+      df['addpath']['filename_no_ext']+'.json'
+    )
+
     df['paths']['path_to_created_trace_file']  = join(
       df['paths']['dramsys'], 
       'configs', 'traces',
@@ -192,3 +201,67 @@ class DRAMConfigFile:
       f.close()
     return experiment
 
+# TODO: create functions that provide the path to each of the processes of the simulation
+# TODO: ISS
+  
+# TODO: CNN 
+  def get_cnn_data(self):
+    return {
+      'path_to_cnn_conv':       join(self.data['paths']['zuse_avf_ki'], 'APPS', 'EISV', 'cnn_converter'),
+      'app':                    self.data['params']['app'],
+      'variable':               self.data['configs']['variable'],
+      'value':                  self.data['configs']['value']
+    }
+  def update_config_file_cnn(
+      self, 
+      file,
+      clkMhz, 
+      n_cluster, 
+      n_units, 
+      n_lanes,
+      n_rams,
+      line_size,
+      associativity,
+      ram_size
+    ):
+    self.data['configs']['cluster'] =       n_cluster,
+    self.data['configs']['units'] =         n_units,
+    self.data['configs']['lanes'] =         n_lanes,
+    self.data['configs']['clkMhz'] =        clkMhz, 
+    self.data['configs']['n_rams'] =        n_rams, 
+    self.data['configs']['line_size'] =     line_size, 
+    self.data['configs']['associativity'] = associativity, 
+    self.data['configs']['ram_size'] =      ram_size
+    self.save(file)
+
+  
+# TODO: DramSys converter
+  def get_conv_data(self):
+    return {
+      'path_to_new_trace_file': self.data['paths']['path_to_created_trace_file'],
+      'path_to_old_trace_file': self.data['paths']['path_to_original_trace_file'],
+      'path_to_old_cfg_file':   self.data['paths']['path_to_dramsys_config_file'],
+      'path_to_new_cfg_file':   self.data['paths']['path_to_created_config_file'],
+      'clkMhz':                 self.data['configs']['clkMhz']
+    }
+
+  def update_config_file_conv(self, file, burst_length):
+    self.data['configs']['burst_length'] = burst_length
+    self.save(file)
+  
+# TODO: Dramsys
+  def get_dramsys_data(self):
+    return {
+      'path_to_dramsys':        self.data['paths']['dramsys'],
+      'prefix':                 self.data['params']['prefix'],
+      'output_dir':             self.data['paths']['path_to_output_dramsys'],
+      'cfgs_dir':               self.data['paths']['path_to_created_config_file'],
+    }
+  
+# TODO: Parser
+  def get_parser_data(self):
+    return {
+      'path_to_output_parsed':  self.data['paths']['path_to_output_parsed'],
+    }
+  
+# TODO: analyser
