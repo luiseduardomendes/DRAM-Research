@@ -1,6 +1,7 @@
 from os.path import join
 from os import makedirs
 import json
+from pprint import pprint
 
 class DRAMConfigFile:
   def __init__(self):
@@ -9,24 +10,23 @@ class DRAMConfigFile:
   def start(self, input_file, path_file):
     self.read_input(input_file)
     self.read_path_file(path_file)
-    self.calculate_paths()
-    self.make_dirs()
   
-  STANDARD_CLUSTER_VALUE = 8
-  STANDARD_UNITS_VALUE = 8
-  STANDARD_LANES_VALUE = 2
-  STANDARD_CLKMHZ_VALUE = 200
-  STANDARD_NRAMS_VALUE = 8
-  STANDARD_LINESIZE_VALUE = 4096
-  STANDARD_ASSOCIATIVITY_VALUE = 4
-  STANDARD_RAMSIZE_VALUE = 524288
-  STANDARD_BURST_LENGTH = 8
+  DEFAULT_CLUSTER_VALUE = 8
+  DEFAULT_UNITS_VALUE = 8
+  DEFAULT_LANES_VALUE = 2
+  DEFAULT_CLKMHZ_VALUE = 200
+  DEFAULT_NRAMS_VALUE = 8
+  DEFAULT_LINESIZE_VALUE = 4096
+  DEFAULT_ASSOCIATIVITY_VALUE = 4
+  DEFAULT_RAMSIZE_VALUE = 524288
+  DEFAULT_BURST_LENGTH = 8
   
   def init_values(self):
     self.data = {}
     self.data['configs'] = {}
     self.data['params'] = {}
     self.data['paths'] = {}
+    self.data['addpath'] = {}
 
     self.data['params']['prefix'] =     None
     self.data['params']['platform'] =   None
@@ -35,32 +35,31 @@ class DRAMConfigFile:
     self.data['params']['variable'] =   None
     self.data['params']['values'] =     None
 
-    self.data['configs']['cluster'] =       self.STANDARD_CLUSTER_VALUE,
-    self.data['configs']['units'] =         self.STANDARD_UNITS_VALUE,
-    self.data['configs']['lanes'] =         self.STANDARD_LANES_VALUE,
-    self.data['configs']['clkMhz'] =        self.STANDARD_CLKMHZ_VALUE, 
-    self.data['configs']['n_rams'] =        self.STANDARD_NRAMS_VALUE, 
-    self.data['configs']['line_size'] =     self.STANDARD_LINESIZE_VALUE, 
-    self.data['configs']['associativity'] = self.STANDARD_ASSOCIATIVITY_VALUE, 
-    self.data['configs']['ram_size'] =      self.STANDARD_RAMSIZE_VALUE
-    self.data['configs']['burst_length'] =  self.STANDARD_BURST_LENGTH  
+    self.data['configs']['cluster'] =       self.DEFAULT_CLUSTER_VALUE
+    self.data['configs']['units'] =         self.DEFAULT_UNITS_VALUE
+    self.data['configs']['lanes'] =         self.DEFAULT_LANES_VALUE
+    self.data['configs']['clkMhz'] =        self.DEFAULT_CLKMHZ_VALUE
+    self.data['configs']['n_rams'] =        self.DEFAULT_NRAMS_VALUE 
+    self.data['configs']['line_size'] =     self.DEFAULT_LINESIZE_VALUE
+    self.data['configs']['associativity'] = self.DEFAULT_ASSOCIATIVITY_VALUE
+    self.data['configs']['ram_size'] =      self.DEFAULT_RAMSIZE_VALUE
+    self.data['configs']['burst_length'] =  self.DEFAULT_BURST_LENGTH  
 
-    self.data['paths']['path_to_log_file'] =            None,
-    self.data['paths']['path_to_original_trace_file'] = None, 
-    self.data['paths']['path_to_dramsys_config_file'] = None,
-    self.data['paths']['path_to_created_config_file'] = None,
-    self.data['paths']['path_to_created_trace_file'] =  None,
-    self.data['paths']['path_to_output_dramsys'] =      None,
-    self.data['paths']['path_to_output_parsed'] =       None,
+    self.data['paths']['path_to_log_file'] =            None
+    self.data['paths']['path_to_original_trace_file'] = None
+    self.data['paths']['path_to_dramsys_config_file'] = None
+    self.data['paths']['path_to_created_config_file'] = None
+    self.data['paths']['path_to_created_trace_file'] =  None
+    self.data['paths']['path_to_output_dramsys'] =      None
+    self.data['paths']['path_to_output_parsed'] =       None
     self.data['paths']['path_to_output_graphs'] =       None
+    self.data['paths']['path_to_config_file'] =         None
     self.data['paths']['dramsys']         =             None
     self.data['paths']['zuse_avf_ki']     =             None
     self.data['paths']['output_data']     =             None
 
     self.data['addpath']['relative_folder'] =           None
     self.data['addpath']['filename_no_ext'] =           None
-    self.data['addpath']['relative_filepath'] =         None
-    self.data['addpath']['output'] =                    None
 
   def read_path_file(self, filename):
     with open(filename, 'r') as f:
@@ -110,7 +109,7 @@ class DRAMConfigFile:
         'trace_file': join('build_release', 'main_mem.trace')
       },
       'cnn':{
-        'log_file': f'sim_{df['params']['app']}.log', 
+        'log_file': f'sim_{df["params"]["app"]}.log', 
         'trace_file': join('sim_results', 'main_mem.trace')
       }
     }
@@ -124,7 +123,7 @@ class DRAMConfigFile:
     df['paths']['path_to_original_trace_file'] = join(
       df['paths']['zuse_avf_ki'], 
       path_dict[platform], 
-       df['params']['zuse_avf_ki'], 
+      subfolder[platform]['trace_file']
     )
 
     df['paths']['path_to_dramsys_config_file'] = join(
@@ -133,71 +132,130 @@ class DRAMConfigFile:
       df['params']['dsys_cfg']
     )
 
-    df['paths']['path_to_created_config_file'] = join(
+    folder = join(
       df['paths']['dramsys'], 
       'configs', 
+      df['addpath']['relative_folder'],
+    )
+    makedirs(folder, exist_ok=True)
+
+    df['paths']['path_to_created_config_file'] = join(
+      folder,
       df['addpath']['filename_no_ext']+'.json'
     )
 
-    df['paths']['path_to_created_trace_file']  = join(
+    folder = join(
       df['paths']['dramsys'], 
       'configs', 'traces',
-      self.relative_file_path + ".stl"
+      df['addpath']['relative_folder'],
     )
+    makedirs(folder, exist_ok=True)
+
+    df['paths']['path_to_created_trace_file']  = join(
+      folder,
+      df['addpath']['filename_no_ext']+".stl"
+    )
+
+    folder = join(
+      df['paths']['output_data'],
+      "dramsys_logs",
+      df['addpath']['relative_folder'],
+    )
+    makedirs(folder, exist_ok=True)
 
     df['paths']['path_to_output_dramsys']      = join(
-      df['paths']['dramsys'], 
-      'outputs',
-      self.relative_file_path + ".log"
+      folder,
+      df['addpath']['filename_no_ext']+".log"
     )
 
-    df['paths']['path_to_output_parsed']       = join(
+    folder = join(
       df['paths']['output_data'], 
       'parsed_data',
-      df['addpath']['relative_filepath']+'.csv'
+      df['addpath']['relative_folder'],
     )
-    
-    df['paths']['path_to_output_graphs']       = join(
+    makedirs(folder, exist_ok=True)
+
+    df['paths']['path_to_output_parsed']       = join(
+      folder,
+      df['addpath']['filename_no_ext']+'.csv'
+    )
+
+    folder = join(
       df['paths']['output_data'], 
       'graphs',
-      df['addpath']['relative_folder']
+      df['addpath']['relative_folder'],
+    )
+    makedirs(folder, exist_ok=True)
+    
+    df['paths']['path_to_output_graphs']       = join(
+      folder,
+      df['addpath']['filename_no_ext']+'.jpg'
     )
 
+    folder = join(
+      df['paths']['output_data'],
+      'config',
+      df['addpath']['relative_folder'],
+    )
+    makedirs(folder, exist_ok=True)
+
+    df['paths']['path_to_config_file']         = join(
+      folder,
+      df['addpath']['filename_no_ext']+'.json'
+    )
+
+  def define_folder(self, df):
+    tmp = df['params']
+    df['addpath']['relative_folder'] = join(
+      tmp['prefix'], 
+      tmp['dsys_cfg'], 
+      tmp['app'],
+      tmp['variable']
+    )
+  
   def define_filename(self, value, df):
     tmp = df['params']
-    self.filename_no_ext = f'{tmp['prefix']}_{tmp['variable']}_{value}'
-    self.relative_file_path = join(self.relative_folder, self.filename_no_ext)
+    df['addpath']['filename_no_ext'] = f"{tmp['prefix']}_{tmp['variable']}_{value}"
 
-    df['addpath']['filename_no_ext'] =           self.filename_no_ext
-    df['addpath']['relative_filepath'] =         self.relative_file_path
+  def save_defaults(self):
+    data = {'default_values': {}}
 
-  def make_dirs(self, df):
-    tmp = df['params']
-    folder = f'{tmp['prefix']}'
-    folder = join(folder, f'{tmp['dsys_cfg']}_{tmp['app']}')
-    folder = join(folder, f'{tmp['variable']}')
+    data['default_values']['cluster'] =       self.DEFAULT_CLUSTER_VALUE
+    data['default_values']['units'] =         self.DEFAULT_UNITS_VALUE
+    data['default_values']['lanes'] =         self.DEFAULT_LANES_VALUE
+    data['default_values']['clkMhz'] =        self.DEFAULT_CLKMHZ_VALUE
+    data['default_values']['n_rams'] =        self.DEFAULT_NRAMS_VALUE
+    data['default_values']['line_size'] =     self.DEFAULT_LINESIZE_VALUE
+    data['default_values']['associativity'] = self.DEFAULT_ASSOCIATIVITY_VALUE
+    data['default_values']['ram_size'] =      self.DEFAULT_RAMSIZE_VALUE
+    data['default_values']['burst_length'] =  self.DEFAULT_BURST_LENGTH  
+
+    folder = self.data['paths']['output_data']
     makedirs(folder, exist_ok=True)
-    self.relative_folder = folder
-    df['addpath']['relative_folder'] = folder
+    filename = join(folder, 'default_values.json')
 
-  def save(self, file:str):
-    self.read_input(file)
+    with open(filename, 'w') as f:
+      json.dump(data, f, indent = 4)
+      f.close()
+
+  def save(self):
+    newdata = self.data.copy()
+    self.define_folder(newdata)
+
     variable = self.data['params']['variable']
     values = self.data['params']['values']
 
-    newdata = self.data[:]
     for value in values:
-      newdata['config'][variable] = value
-      self.calculate_paths(newdata)
+      newdata['configs'][variable] = value
       self.define_filename(value, newdata)
-      self.make_dirs(newdata)
+      self.calculate_paths(newdata)
       
-      self.create_experiment(self, join(newdata['addpath']['output'], newdata['addpath']['relative_filepath']+'.json'))
+      self.create_experiment(newdata['paths']['path_to_config_file'])
 
   def create_experiment(self, filename):
     experiment = self.data
     with open(filename, 'w') as f:
-      json.dump(experiment, f)
+      json.dump(experiment, f, indent = 4)
       f.close()
     return experiment
 
@@ -265,3 +323,7 @@ class DRAMConfigFile:
     }
   
 # TODO: analyser
+  def get_analyser_data(self):
+    return {
+      'path_to_output_graphs':  None
+    }
