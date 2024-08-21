@@ -34,6 +34,7 @@ class DRAMConfigFile:
     self.data['params']['dsys_cfg'] =   None
     self.data['params']['variable'] =   None
     self.data['params']['values'] =     None
+    self.data['params']['value'] =     None
 
     self.data['configs']['cluster'] =       self.DEFAULT_CLUSTER_VALUE
     self.data['configs']['units'] =         self.DEFAULT_UNITS_VALUE
@@ -82,8 +83,9 @@ class DRAMConfigFile:
     self.data['params']['variable']     = json_obj["params"].get("variable",  None)
     self.data['params']['values']       = json_obj["params"].get("values",    []  )
 
-  def read_existing(self):
-    pass
+  def read_config(self, file_path):
+    with open(file_path, 'r') as file:
+      self.data = json.load(file)
 
   def __str__(self):
     # String representation of the object for easy printing
@@ -232,25 +234,33 @@ class DRAMConfigFile:
 
     folder = self.data['paths']['output_data']
     makedirs(folder, exist_ok=True)
-    filename = join(folder, 'default_values.json')
+    file_path = join(folder, 'default_values.json')
 
-    with open(filename, 'w') as f:
+    with open(file_path, 'w') as f:
       json.dump(data, f, indent = 4)
       f.close()
+
+    return file_path
 
   def save(self):
     newdata = self.data.copy()
     self.define_folder(newdata)
+    file_list = []
 
     variable = self.data['params']['variable']
     values = self.data['params']['values']
 
     for value in values:
       newdata['configs'][variable] = value
+      newdata['params']['value'] = value
       self.define_filename(value, newdata)
       self.calculate_paths(newdata)
       
-      self.create_experiment(newdata['paths']['path_to_config_file'])
+      cfg_file = newdata['paths']['path_to_config_file']
+      file_list.append(cfg_file)
+
+      self.create_experiment(cfg_file)
+    return file_list
 
   def create_experiment(self, filename):
     experiment = self.data
@@ -259,16 +269,28 @@ class DRAMConfigFile:
       f.close()
     return experiment
 
+  def variable_map(self, variable):
+    data = {
+      'cluster': 'CLUSTERS',
+      'units': 'UNITS',
+      'lanes': 'LAMES',
+      'n_rams': 'NR_RAMS',
+      'line_size': 'LINE_SIZE',
+      'associativity': 'ASSOCIATIVITY',
+      'ram_size': 'RAM_SIZE'
+    }
+    return data[variable]
+
 # TODO: create functions that provide the path to each of the processes of the simulation
 # TODO: ISS
   
 # TODO: CNN 
   def get_cnn_data(self):
     return {
-      'path_to_cnn_conv':       join(self.data['paths']['zuse_avf_ki'], 'APPS', 'EISV', 'cnn_converter'),
+      'path_to_cnn_conv':       join(self.data['paths']['zuse_avf_ki'], 'vpro_sys_behavioral', 'APPS', 'EISV', 'cnn_converter'),
       'app':                    self.data['params']['app'],
-      'variable':               self.data['configs']['variable'],
-      'value':                  self.data['configs']['value']
+      'variable':               self.data['params']['variable'],
+      'value':                  self.data['params']['value']
     }
   def update_config_file_cnn(
       self, 
@@ -282,6 +304,8 @@ class DRAMConfigFile:
       associativity,
       ram_size
     ):
+    self.read_config(file)
+    self.data['paths']['path_to_config_file'] = file
     self.data['configs']['cluster'] =       n_cluster,
     self.data['configs']['units'] =         n_units,
     self.data['configs']['lanes'] =         n_lanes,
@@ -290,35 +314,39 @@ class DRAMConfigFile:
     self.data['configs']['line_size'] =     line_size, 
     self.data['configs']['associativity'] = associativity, 
     self.data['configs']['ram_size'] =      ram_size
-    self.save(file)
+    self.save()
 
   
 # TODO: DramSys converter
   def get_conv_data(self):
     return {
+      'path_to_dramsys':        self.data['paths']['dramsys'],
       'path_to_new_trace_file': self.data['paths']['path_to_created_trace_file'],
       'path_to_old_trace_file': self.data['paths']['path_to_original_trace_file'],
       'path_to_old_cfg_file':   self.data['paths']['path_to_dramsys_config_file'],
       'path_to_new_cfg_file':   self.data['paths']['path_to_created_config_file'],
-      'clkMhz':                 self.data['configs']['clkMhz']
+      'clkMhz':                 self.data['configs']['clkMhz'],
     }
 
   def update_config_file_conv(self, file, burst_length):
+    self.read_config(file)
     self.data['configs']['burst_length'] = burst_length
-    self.save(file)
+    self.data['paths']['path_to_config_file'] = file
+    self.save()
   
 # TODO: Dramsys
   def get_dramsys_data(self):
     return {
       'path_to_dramsys':        self.data['paths']['dramsys'],
       'prefix':                 self.data['params']['prefix'],
-      'output_dir':             self.data['paths']['path_to_output_dramsys'],
-      'cfgs_dir':               self.data['paths']['path_to_created_config_file'],
+      'output_file':            self.data['paths']['path_to_output_dramsys'],
+      'cfg_file':               self.data['paths']['path_to_created_config_file'],
     }
   
 # TODO: Parser
   def get_parser_data(self):
     return {
+      'path_to_output_dramsys': self.data['paths']['path_to_output_dramsys'],
       'path_to_output_parsed':  self.data['paths']['path_to_output_parsed'],
     }
   

@@ -31,6 +31,8 @@ class CNNConv:
       line_size	= -1,
       associativity	= -1,
       ram_size = -1,
+      directives = '',
+      debug=False
   ):
     cmd = f'cd {self.path_cnn_conv} && make sim_{self.app}'
     if clusters != -1:
@@ -47,5 +49,9 @@ class CNNConv:
       cmd += f' ASSOCIATIVITY={associativity}'
     if ram_size != -1:
       cmd += f' RAM_SIZE={ram_size}'
+    cmd += directives
 
-    subprocess.call(cmd, shell=True)
+    if not debug:
+      subprocess.call(cmd, shell=True)
+    else:
+      print(cmd)

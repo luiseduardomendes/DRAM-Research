@@ -4,7 +4,7 @@
         "platform": "cnn",
         "app": "yololite",
         "dsys_cfg": "ddr4-example.json",
-        "variable": "clusters",
-        "values": [1, 2, 4, 8, 16]
+        "variable": "cluster",
+        "values": [8, 16]
     }
 }

@@ -111,10 +111,11 @@ class Dramsys:
     
     else:
       file_name = basename(cfg_file)[:-5]
-      if output_file == '':
-        output_file = file_name + "_log" + ".txt"
-      if output_folder != '':
-        output_file = join(output_folder, output_file)
+
+    if output_file == '':
+      output_file = file_name + "_log" + ".txt"
+    if output_folder != '':
+      output_file = join(output_folder, output_file)
 
     cmd = self.__generate_cmd__(cfg_file, output_file)
     #print(cmd)

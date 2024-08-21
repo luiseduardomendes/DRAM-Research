@@ -9,7 +9,7 @@ class Converter:
     'w': 'write'
   }
 
-  def __init__(self, dramsys_path, iss_path, app) -> None:
+  def __init__(self, dramsys_path, iss_path='', app='') -> None:
     self.init_paths(dramsys_path)
     self.init_iss_paths(iss_path, app)
 
@@ -61,7 +61,7 @@ class Converter:
     data['memspec'] = new_memspec_filename
 
     data["tracesetup"][0]['clkMhz'] = clkMhz
-    data["tracesetup"][0]['name'] = Path(trace).name
+    data["tracesetup"][0]['name'] = trace
 
     json_object['simulation'] = data
 

@@ -23,7 +23,8 @@
             4,
             8,
             16
-        ]
+        ],
+        "value": 4
     },
     "paths": {
         "path_to_log_file": "/home/luismendes/zuse_ki_avf/vpro_sys_behavioral/APPS/EISV/cnn_converter/nets/yololite/sim_yololite.log",

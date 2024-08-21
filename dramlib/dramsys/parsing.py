@@ -53,7 +53,7 @@ class Parser:
     self.power = power
     pass
 
-  def parse_file(self, file, output_dir = '') -> dict:
+  def parse_file(self, file, output_dir = '', output_file = '') -> dict:
     if not isfile(file):
       raise Exception(f"Parsing error: file not found: \"{file}\"")
     
@@ -79,7 +79,10 @@ class Parser:
     pprint(df)
 
     df = self.convert_units(df)
-    out_name = join(output_dir, "parsed_"+Path(file).stem+".csv")
+    if output_file == '':
+      out_name = join(output_dir, "parsed_"+Path(file).stem+".csv")
+    else: 
+      out_name = output_file
     self.to_csv(df, out_name)
     return df
   
