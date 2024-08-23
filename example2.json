@@ -1,10 +1,10 @@
 {    
     "params":{
-        "prefix": "cluster01",
+        "prefix": "cluster_example",
         "platform": "cnn",
-        "app": "yololite",
+        "app": "nnqtest_conv1d",
         "dsys_cfg": "ddr4-example.json",
         "variable": "cluster",
-        "values": [8, 16]
+        "values": [1, 2, 4, 8, 16]
     }
 }

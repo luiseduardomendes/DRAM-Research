@@ -1,0 +1,13 @@
+{
+    "default_values": {
+        "cluster": 8,
+        "units": 8,
+        "lanes": 2,
+        "clkMhz": 200,
+        "n_rams": 8,
+        "line_size": 4096,
+        "associativity": 4,
+        "ram_size": 524288,
+        "burst_length": 8
+    }
+}

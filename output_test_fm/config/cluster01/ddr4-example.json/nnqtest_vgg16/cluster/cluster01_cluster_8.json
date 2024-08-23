@@ -1,0 +1,47 @@
+{
+    "configs": {
+        "cluster": 8,
+        "units": 8,
+        "lanes": 2,
+        "clkMhz": 200,
+        "n_rams": 8,
+        "line_size": 4096,
+        "associativity": 4,
+        "ram_size": 524288,
+        "burst_length": 64
+    },
+    "params": {
+        "prefix": "cluster01",
+        "platform": "cnn",
+        "app": "nnqtest_vgg16",
+        "dsys_cfg": "ddr4-example.json",
+        "variable": "cluster",
+        "values": [
+            1,
+            2,
+            4,
+            8,
+            16
+        ],
+        "value": 8
+    },
+    "paths": {
+        "path_to_log_file": "/home/luismendes/zuse_ki_avf/vpro_sys_behavioral/APPS/EISV/cnn_converter/nets/nnqtest_vgg16/sim_nnqtest_vgg16.log",
+        "path_to_original_trace_file": "/home/luismendes/zuse_ki_avf/vpro_sys_behavioral/APPS/EISV/cnn_converter/nets/nnqtest_vgg16/sim_results/main_mem.trace",
+        "path_to_dramsys_config_file": "/home/luismendes/DRAMSys/configs/ddr4-example.json",
+        "path_to_created_config_file": "/home/luismendes/DRAMSys/configs/cluster01/ddr4-example.json/nnqtest_vgg16/cluster/cluster01_cluster_8.json",
+        "path_to_created_trace_file": "/home/luismendes/DRAMSys/configs/traces/cluster01/ddr4-example.json/nnqtest_vgg16/cluster/cluster01_cluster_8.stl",
+        "path_to_output_dramsys": "/home/luismendes/DRAM-Research/output_test_fm/dramsys_logs/cluster01/ddr4-example.json/nnqtest_vgg16/cluster/cluster01_cluster_8.log",
+        "path_to_output_parsed": "/home/luismendes/DRAM-Research/output_test_fm/parsed_data/cluster01/ddr4-example.json/nnqtest_vgg16/cluster/cluster01_cluster_8.csv",
+        "path_to_output_graphs": "/home/luismendes/DRAM-Research/output_test_fm/graphs/cluster01/ddr4-example.json/nnqtest_vgg16/cluster/cluster01_cluster_8.jpg",
+        "path_to_config_file": "/home/luismendes/DRAM-Research/output_test_fm/config/cluster01/ddr4-example.json/nnqtest_vgg16/cluster/cluster01_cluster_8.json",
+        "dramsys": "/home/luismendes/DRAMSys/",
+        "zuse_avf_ki": "/home/luismendes/zuse_ki_avf/",
+        "output_data": "/home/luismendes/DRAM-Research/output_test_fm/"
+    },
+    "addpath": {
+        "relative_folder": "cluster01/ddr4-example.json/nnqtest_vgg16/cluster",
+        "filename_no_ext": "cluster01_cluster_8",
+        "genericfilename": "cluster01_cluster"
+    }
+}

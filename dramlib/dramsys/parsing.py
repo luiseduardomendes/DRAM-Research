@@ -1,5 +1,6 @@
 import re
 from os.path import isfile, join
+from os import listdir
 import pandas as pd
 from pathlib import Path
 from pprint import pprint
@@ -76,7 +77,6 @@ class Parser:
           raise Exception(f"Incorrect file format: {file}")
       else:
         raise Exception(f"Incorrect file format: {file}")
-    pprint(df)
 
     df = self.convert_units(df)
     if output_file == '':
@@ -107,6 +107,10 @@ class Parser:
 
   def to_csv(self, df_in, export_name):      
     df_in.to_csv(export_name)
+
+  
+
+
 
 
 #parser = Parser()
