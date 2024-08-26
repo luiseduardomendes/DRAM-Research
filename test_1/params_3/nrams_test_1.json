@@ -1,0 +1,10 @@
+{    
+    "params":{
+        "prefix": "test_1",
+        "platform": "cnn",
+        "app": "yololite",
+        "dsys_cfg": "hbm2-example.json",
+        "variable": "n_rams",
+        "values": [1, 2, 4, 8, 16]
+    }
+}

@@ -1,0 +1,49 @@
+{
+    "configs": {
+        "cluster": 8,
+        "units": 8,
+        "lanes": 2,
+        "clkMhz": 200,
+        "n_rams": 8,
+        "line_size": 16384,
+        "associativity": 4,
+        "ram_size": 524288,
+        "burst_length": 256
+    },
+    "params": {
+        "prefix": "test_1",
+        "platform": "cnn",
+        "app": "nnqtest_conv1d",
+        "dsys_cfg": "ddr4-example.json",
+        "variable": "line_size",
+        "values": [
+            1024,
+            2048,
+            4096,
+            8192,
+            16384
+        ],
+        "value": 16384
+    },
+    "paths": {
+        "path_to_log_file": "/home/luismendes/zuse_ki_avf/vpro_sys_behavioral/APPS/EISV/cnn_converter/nets/nnqtest_conv1d/sim_nnqtest_conv1d.log",
+        "path_to_original_trace_file": "/home/luismendes/zuse_ki_avf/vpro_sys_behavioral/APPS/EISV/cnn_converter/nets/nnqtest_conv1d/sim_results/main_mem.trace",
+        "path_to_dramsys_config_file": "/home/luismendes/DRAMSys/configs/ddr4-example.json",
+        "path_to_created_config_file": "/home/luismendes/DRAMSys/configs/test_1/ddr4-example/nnqtest_conv1d/line_size/test_1_line_size_16384.json",
+        "path_to_created_trace_file": "/home/luismendes/DRAMSys/configs/traces/test_1/ddr4-example/nnqtest_conv1d/line_size/test_1_line_size_16384.stl",
+        "path_to_output_dramsys": "/home/luismendes/DRAM-Research/test_1/output_test_1/dramsys_logs/test_1/ddr4-example/nnqtest_conv1d/line_size/test_1_line_size_16384.log",
+        "path_to_output_parsed": "/home/luismendes/DRAM-Research/test_1/output_test_1/parsed_data/test_1/ddr4-example/nnqtest_conv1d/line_size/test_1_line_size_16384.csv",
+        "path_to_output_graphs": "/home/luismendes/DRAM-Research/test_1/output_test_1/graphs/test_1/ddr4-example/nnqtest_conv1d/line_size",
+        "path_to_config_file": "/home/luismendes/DRAM-Research/test_1/output_test_1/config/test_1/ddr4-example/nnqtest_conv1d/line_size/test_1_line_size_16384.json",
+        "path_to_group_csv": "/home/luismendes/DRAM-Research/test_1/output_test_1/parsed_data/test_1/ddr4-example/nnqtest_conv1d/line_size/test_1_line_size.csv",
+        "path_to_group_cfg": "/home/luismendes/DRAM-Research/test_1/output_test_1/config/test_1/ddr4-example/nnqtest_conv1d/line_size/test_1_line_size.json",
+        "dramsys": "/home/luismendes/DRAMSys/",
+        "zuse_avf_ki": "/home/luismendes/zuse_ki_avf/",
+        "output_data": "/home/luismendes/DRAM-Research/test_1/output_test_1/"
+    },
+    "addpath": {
+        "relative_folder": "test_1/ddr4-example/nnqtest_conv1d/line_size",
+        "filename_no_ext": "test_1_line_size_16384",
+        "genericfilename": "test_1_line_size"
+    }
+}

@@ -3,7 +3,7 @@
         "prefix": "test_1",
         "platform": "cnn",
         "app": "yololite",
-        "dsys_cfg": "ddr4-example.json",
+        "dsys_cfg": "lpddr4-example.json",
         "variable": "ram_size",
         "values": [131072, 262144, 524288, 1048576, 2097152]
     }

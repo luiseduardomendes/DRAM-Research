@@ -1,0 +1,10 @@
+{    
+    "params":{
+        "prefix": "test_1",
+        "platform": "cnn",
+        "app": "nnqtest_conv1d",
+        "dsys_cfg": "ddr4-example.json",
+        "variable": "associativity",
+        "values": [1, 2, 4, 8, 16]
+    }
+}

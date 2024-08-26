@@ -3,7 +3,7 @@
         "prefix": "test_1",
         "platform": "cnn",
         "app": "yololite",
-        "dsys_cfg": "ddr4-example.json",
+        "dsys_cfg": "lpddr4-example.json",
         "variable": "n_rams",
         "values": [1, 2, 4, 8, 16]
     }

@@ -1,0 +1,10 @@
+Metadata-Version: 2.1
+Name: dramlib
+Version: 0.0.10
+Summary: Set of tools to analyse DRAM performance integrated with different systems
+Home-page: https://github.com/luiseduardomendes/DRAM-Research
+Author: Luis Eduardo Pereira Mendes
+Author-email: lepmendes@inf.ufrgs.br
+License: MIT
+Description-Content-Type: text/markdown
+License-File: LICENSE

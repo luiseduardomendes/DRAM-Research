@@ -1,0 +1,10 @@
+{    
+    "params":{
+        "prefix": "test_1",
+        "platform": "cnn",
+        "app": "nnqtest_vgg16",
+        "dsys_cfg": "hbm2-example.json",
+        "variable": "line_size",
+        "values": [1024, 2048, 4096, 8192, 16384]
+    }
+}

@@ -1,0 +1,147 @@
+<mxfile host="65bd71144e">
+    <diagram id="WohQQ4aC4d5Yvd0C7lp7" name="Page-1">
+        <mxGraphModel dx="1905" dy="946" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="none" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="36" value="DRAM Lib" style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=1;fillColor=#6d8764;strokeColor=#FFFFFF;fontColor=#ffffff;fontSize=15;" vertex="1" parent="1">
+                    <mxGeometry x="-49" y="360" width="719" height="250" as="geometry"/>
+                </mxCell>
+                <mxCell id="44" style="edgeStyle=none;html=1;fontSize=15;strokeColor=#FFFFFF;" edge="1" parent="1" source="2" target="9">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="310" y="535"/>
+                            <mxPoint x="310" y="470"/>
+                            <mxPoint x="160" y="470"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="2" value="Trace&lt;br style=&quot;font-size: 15px;&quot;&gt;Converter" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#76608a;fontColor=#ffffff;strokeColor=#FFFFFF;fontSize=15;" vertex="1" parent="1">
+                    <mxGeometry x="180" y="490" width="110" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" style="edgeStyle=none;html=1;strokeColor=#FFFFFF;" edge="1" parent="1" source="3" target="19">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="470" y="705"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="3" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;DRAMSys&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;" vertex="1" parent="1">
+                    <mxGeometry x="235" y="640" width="200" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="42" style="edgeStyle=none;html=1;fontSize=15;strokeColor=#FFFFFF;" edge="1" parent="1" source="5" target="9">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="100" y="420"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="5" value="" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=left;spacingLeft=5;fontSize=15;" vertex="1" parent="1">
+                    <mxGeometry x="40" y="250" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="output.trace" style="resizeWidth=1;part=1;strokeColor=none;fillColor=none;align=left;spacingLeft=5;fontSize=15;" vertex="1" parent="5">
+                    <mxGeometry width="119.99999999999999" height="25" relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="45" style="edgeStyle=none;html=1;fontSize=15;strokeColor=#FFFFFF;" edge="1" parent="1" source="7" target="14">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="240" y="420"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="7" value="" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=left;spacingLeft=5;fontSize=15;" vertex="1" parent="1">
+                    <mxGeometry x="180" y="250" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="output.stl" style="resizeWidth=1;part=1;strokeColor=none;fillColor=none;align=left;spacingLeft=5;fontSize=15;" vertex="1" parent="7">
+                    <mxGeometry width="119.99999999999999" height="25" relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" style="edgeStyle=none;html=1;fontSize=15;strokeColor=#FFFFFF;" edge="1" parent="1" source="9" target="7">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="240" y="420"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="43" style="edgeStyle=none;html=1;fontSize=15;strokeColor=#FFFFFF;" edge="1" parent="1" source="9" target="2">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="160" y="535"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="9" value="Conv to&lt;br style=&quot;font-size: 15px;&quot;&gt;DRAMsys" style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;fillColor=#647687;fontColor=#ffffff;strokeColor=#FFFFFF;fontSize=15;" vertex="1" parent="1">
+                    <mxGeometry x="120" y="385" width="80" height="75" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" style="edgeStyle=none;html=1;strokeColor=#FFFFFF;" edge="1" parent="1" source="14" target="3">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="Run &lt;br style=&quot;font-size: 15px;&quot;&gt;DRAMSys" style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;fillColor=#647687;fontColor=#ffffff;strokeColor=#FFFFFF;fontSize=15;" vertex="1" parent="1">
+                    <mxGeometry x="290" y="390" width="90" height="65" as="geometry"/>
+                </mxCell>
+                <mxCell id="23" style="edgeStyle=none;html=1;fontSize=15;strokeColor=#FFFFFF;" edge="1" parent="1" source="19" target="21">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="540" y="420"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="34" style="edgeStyle=none;html=1;fontSize=15;strokeColor=#FFFFFF;" edge="1" parent="1" source="19" target="33">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="19" value="Parse&lt;br style=&quot;font-size: 15px;&quot;&gt;Output" style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;fillColor=#647687;fontColor=#ffffff;strokeColor=#FFFFFF;fontSize=15;" vertex="1" parent="1">
+                    <mxGeometry x="435" y="380" width="75" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="21" value="" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=left;spacingLeft=5;fontSize=15;" vertex="1" parent="1">
+                    <mxGeometry x="480" y="250" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="22" value="dramsys.csv" style="resizeWidth=1;part=1;strokeColor=none;fillColor=none;align=left;spacingLeft=5;fontSize=15;" vertex="1" parent="21">
+                    <mxGeometry width="119.99999999999999" height="25" relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="24" value="CNN Converter" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;fontSize=20;" vertex="1" parent="1">
+                    <mxGeometry y="640" width="200" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="30" style="edgeStyle=none;html=1;strokeColor=#FFFFFF;" edge="1" parent="1" source="25" target="28">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="-60" y="490"/>
+                            <mxPoint x="-60" y="420"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="25" value="" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=left;spacingLeft=5;fontSize=16;" vertex="1" parent="1">
+                    <mxGeometry x="-210" y="450" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="26" value="config.json" style="resizeWidth=1;part=1;strokeColor=none;fillColor=none;align=left;spacingLeft=5;fontSize=16;" vertex="1" parent="25">
+                    <mxGeometry width="119.99999999999999" height="25" relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="29" style="edgeStyle=none;html=1;strokeColor=#FFFFFF;" edge="1" parent="1" source="28" target="24">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="100" y="420"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="28" value="CNN&lt;br style=&quot;font-size: 15px;&quot;&gt;Converter&lt;br style=&quot;font-size: 15px;&quot;&gt;Runner" style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;fillColor=#647687;fontColor=#ffffff;strokeColor=#FFFFFF;fontSize=15;" vertex="1" parent="1">
+                    <mxGeometry x="-30" y="385" width="90" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="41" style="edgeStyle=none;html=1;strokeColor=#FFFFFF;" edge="1" parent="1" source="33" target="39">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="680" y="420"/>
+                            <mxPoint x="680" y="490"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="33" value="Plot&lt;br style=&quot;font-size: 15px;&quot;&gt;Output" style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;fillColor=#647687;fontColor=#ffffff;strokeColor=#FFFFFF;fontSize=15;" vertex="1" parent="1">
+                    <mxGeometry x="570" y="380" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="39" value="" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=left;spacingLeft=5;fontSize=15;" vertex="1" parent="1">
+                    <mxGeometry x="700" y="450" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="40" value="dramsys.jpg" style="resizeWidth=1;part=1;strokeColor=none;fillColor=none;align=left;spacingLeft=5;fontSize=15;" vertex="1" parent="39">
+                    <mxGeometry width="119.99999999999999" height="25" relative="1" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
