@@ -1,0 +1,52 @@
+{
+    "configs": {
+        "cluster": 4,
+        "units": 8,
+        "lanes": 2,
+        "clkMhz": 200,
+        "n_rams": 8,
+        "line_size": 4096,
+        "associativity": 4,
+        "ram_size": 524288,
+        "burst_length": 64
+    },
+    "params": {
+        "prefix": "test_1",
+        "platform": "cnn",
+        "app": "yololite",
+        "dsys_cfg": "ddr4-example.json",
+        "variable": "cluster",
+        "values": [
+            1,
+            2,
+            4,
+            8,
+            16
+        ],
+        "value": 4
+    },
+    "paths": {
+        "path_to_log_file": "/home/luismendes/zuse_ki_avf/vpro_sys_behavioral/APPS/EISV/cnn_converter/nets/yololite/sim_yololite.log",
+        "path_to_original_trace_file": "/home/luismendes/zuse_ki_avf/vpro_sys_behavioral/APPS/EISV/cnn_converter/nets/yololite/sim_results/main_mem.trace",
+        "path_to_dramsys_config_file": "/home/luismendes/DRAMSys/configs/ddr4-example.json",
+        "path_to_created_config_file": "/home/luismendes/DRAMSys/configs/test_1/ddr4-example/yololite/cluster/test_1_cluster_4.json",
+        "path_to_created_trace_file": "/home/luismendes/DRAMSys/configs/traces/test_1/ddr4-example/yololite/cluster/test_1_cluster_4.stl",
+        "path_to_output_dramsys": "/home/luismendes/DRAM-Research/dram_analysis/output/dramsys_logs/test_1/ddr4-example/yololite/cluster/test_1_cluster_4.log",
+        "path_to_output_parsed": "/home/luismendes/DRAM-Research/dram_analysis/output/parsed_data/test_1/ddr4-example/yololite/cluster/test_1_cluster_4.csv",
+        "path_to_output_graphs": "/home/luismendes/DRAM-Research/dram_analysis/output/graphs/test_1/ddr4-example/yololite/cluster",
+        "path_to_config_file": "/home/luismendes/DRAM-Research/dram_analysis/output/config/test_1/ddr4-example/yololite/cluster/test_1_cluster_4.json",
+        "path_to_group_csv": "/home/luismendes/DRAM-Research/dram_analysis/output/parsed_data/test_1/ddr4-example/yololite/cluster/test_1_cluster.csv",
+        "path_to_group_cfg": "/home/luismendes/DRAM-Research/dram_analysis/output/config/test_1/ddr4-example/yololite/cluster/test_1_cluster.json",
+        "path_list_to_group_cfg": [
+            "/home/luismendes/DRAM-Research/dram_analysis/output/config/test_1/ddr4-example/yololite/cluster/test_1_cluster_4.json"
+        ],
+        "dramsys": "/home/luismendes/DRAMSys/",
+        "zuse_ki_avf": "/home/luismendes/zuse_ki_avf/",
+        "output_data": "/home/luismendes/DRAM-Research/dram_analysis/output/"
+    },
+    "addpath": {
+        "relative_folder": "test_1/ddr4-example/yololite/cluster",
+        "filename_no_ext": "test_1_cluster_4",
+        "genericfilename": "test_1_cluster"
+    }
+}

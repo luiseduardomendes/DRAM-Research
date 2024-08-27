@@ -1,3 +1,18 @@
+Metadata-Version: 2.1
+Name: dramlib
+Version: 1.0.0
+Summary: Set of tools to analyse DRAM performance integrated with different systems
+Home-page: https://github.com/luiseduardomendes/DRAM-Research
+Author: Luis Eduardo Pereira Mendes
+Author-email: lepmendes@inf.ufrgs.br
+License: MIT
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Operating System :: Ubuntu
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Requires-Dist: pandas
+Requires-Dist: matplotlib
+
 # DRAM Lib
 This repository contains a set of tools to work with tools from the ZuSE-KI-AVF project, including the CNN Converter and ISS. To use this tool it's necessary the installation of [DRAMSys](https://github.com/tukl-msd/DRAMSys) and [VPRO Sys Behavior](https://git.eit.uni-kl.de/ems/astdm/zuse_ki_avf/vpro_sys_behavioral).
 
